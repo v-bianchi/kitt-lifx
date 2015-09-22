@@ -6,7 +6,7 @@ require 'json'
 CONFIG = YAML.load_file(File.join(File.expand_path(File.dirname(__FILE__)), "config.yml"))
 
 COLORS = {
-  green:  [  46, 204, 113 ],
+  green:  [  20, 180, 90 ],
   orange: [ 230, 220,  120 ],
   red:    [ 255,   0,   0 ]
 }
@@ -17,7 +17,8 @@ def off
 end
 
 def batch_color
-  JSON.parse(RestClient.get("#{CONFIG[:base_url]}/api/v1/camps/#{CONFIG[:batch_slug]}/color"))['color']
+  url = "#{CONFIG[:base_url]}/api/v1/camps/#{CONFIG[:batch_slug]}/color?waiting_duration_alarm=#{CONFIG[:waiting_duration_alarm]}"
+  JSON.parse(RestClient.get(url))['color']
 end
 
 begin
