@@ -1,0 +1,4 @@
+:base_url: http://localhost:3000
+# :base_url: http://kitt.lewagon.org
+
+:batch_slug: 15
