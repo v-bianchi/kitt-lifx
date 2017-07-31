@@ -6,6 +6,7 @@ require 'json'
 CONFIG = YAML.load_file(File.join(File.expand_path(File.dirname(__FILE__)), "config.yml"))
 
 COLORS = {
+  grey:   [   30, 30,   30 ],
   green:  [  20, 180,   90 ],
   orange: [ 230, 220,  120 ],
   red:    [ 255,   0,    0 ]
