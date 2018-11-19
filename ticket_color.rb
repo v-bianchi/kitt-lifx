@@ -1,19 +1,27 @@
-require 'blink1'
+require 'lifx_api'
 require 'yaml'
 require 'rest-client'
 require 'json'
 
 CONFIG = YAML.load_file(File.join(File.expand_path(File.dirname(__FILE__)), "config.yml"))
+SECRET = YAML.load_file(File.join(File.expand_path(File.dirname(__FILE__)), "secret.yml"))
 
+BRIGHTNESS = CONFIG[:brightness]
 COLORS = {
-  grey:   [   30, 30,   30 ],
-  green:  [  20, 180,   90 ],
-  orange: [ 230, 220,  120 ],
-  red:    [ 255,   0,    0 ]
+  grey:   "white brightness:0.05",
+  green:  "rgb:20,180,90 brightness:#{BRIGHTNESS}",
+  orange: "rgb:230,220,120 brightness:#{BRIGHTNESS}",
+  red:    "rgb:255,0 0 brightness:#{BRIGHTNESS}"
 }
 
+access_token = SECRET[:api_token]
+LIFX_CLIENT = LifxApi.new access_token
+lights = LIFX_CLIENT.list_lights
+exit() if lights.count == 0
+LIGHT_ID = SECRET[:light_id]
+
 def off
-  Blink1.open &:off
+  LIFX_CLIENT.set_state selector: "id:#{LIGHT_ID}", power: "off"
   puts "Bye"
 end
 
@@ -27,12 +35,10 @@ begin
   loop do
     begin
       color = batch_color
-      Blink1.open do |blink1|
-        puts "#{Time.now}: Showing #{color}"
-        blink1.set_rgb *COLORS[color.to_sym]
-      end
+      puts "#{Time.now}: Showing #{color}"
+      LIFX_CLIENT.set_state selector: "id:#{LIGHT_ID}", power: "on", color: COLORS[color.to_sym]
     rescue SocketError
-      puts "It seems that your not connected to the Internet"
+      puts "It seems that you are not connected to the Internet"
     end
     sleep(5)
   end

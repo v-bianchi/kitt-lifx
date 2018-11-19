@@ -1,5 +1,6 @@
 # :base_url: http://localhost:3000
 :base_url: https://kitt.lewagon.com
 
-:batch_slug: 74
+:batch_slug: 188
 :waiting_duration_alarm: 300  # 5.minutes
+:brightness: 0.3 # Range from 0.00 to 1.00

@@ -1,5 +1,5 @@
 source "https://rubygems.org"
 
 gem "rest-client"
-gem "rb-blink1"
+gem "lifx_api"
 gem "daemons"
