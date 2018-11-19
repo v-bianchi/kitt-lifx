@@ -10,7 +10,7 @@ BRIGHTNESS = CONFIG[:brightness]
 COLORS = {
   grey:   "white brightness:0.05",
   green:  "rgb:20,180,90 brightness:#{BRIGHTNESS}",
-  orange: "rgb:230,220,120 brightness:#{BRIGHTNESS}",
+  orange: "rgb:255,191,0 brightness:#{BRIGHTNESS}",
   red:    "rgb:255,0 0 brightness:#{BRIGHTNESS}"
 }
 
@@ -35,7 +35,7 @@ begin
   loop do
     begin
       color = batch_color
-      puts "#{Time.now}: Showing #{color}"
+      puts "#{Time.now}: Batch #{CONFIG[:batch_slug]} showing #{color}"
       LIFX_CLIENT.set_state selector: "id:#{LIGHT_ID}", power: "on", color: COLORS[color.to_sym]
     rescue SocketError
       puts "It seems that you are not connected to the Internet"
