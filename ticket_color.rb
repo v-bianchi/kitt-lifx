@@ -10,8 +10,8 @@ BRIGHTNESS = CONFIG[:brightness]
 COLORS = {
   grey:   "white brightness:0.05",
   green:  "rgb:20,180,90 brightness:#{BRIGHTNESS}",
-  orange: "rgb:255,191,0 brightness:#{BRIGHTNESS}",
-  red:    "rgb:255,0 0 brightness:#{BRIGHTNESS}"
+  orange: "rgb:230,200,10 brightness:#{BRIGHTNESS}",
+  red:    "rgb:255,0,0 brightness:#{BRIGHTNESS}"
 }
 
 access_token = SECRET[:api_token]
